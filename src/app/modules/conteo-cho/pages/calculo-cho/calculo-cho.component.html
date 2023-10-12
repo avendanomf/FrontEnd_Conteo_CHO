@@ -1,93 +1,119 @@
 <div class="container">
     <div class="card mt-4">
-      <div class="card-body">
-        <h2 class="card-title text-center">Registro y calculo de CHO</h2>
-        <form>
-            <div class="form-group">
-                <label class="h5" for="fecha">Fecha:</label>
-                <div class="input-group date">
-                  <input type="text" id="fecha" name="fecha" class="form-control form-control-sm" [(ngModel)]="fecha">
-                  <div class="input-group-append">
-                    <span class="input-group-text">
-                      <i class="fa fa-calendar"></i>
-                    </span>
-                  </div>
+        <div class="card-body">
+            <h2 class="card-title text-center">Registro y calculo de CHO</h2>
+            <form>
+                <!-- <div class="form-group">
+                    <label class="h5" for="fecha">Fecha:</label>
+                    <div class="input-group date">
+                        <input type="text" id="fecha" name="fecha" class="form-control form-control-sm"
+                            [(ngModel)]="fecha">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div> -->
+                <form class="row row-cols-sm-auto">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <input
+                                class="form-control"
+                                placeholder="yyyy-mm-dd"
+                                name="dp"
+                                [(ngModel)]="model"
+                                ngbDatepicker
+                                #d="ngbDatepicker"
+                            />
+                            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="form-group">
+                    <label class="h5" for="comida">Comida:</label>
+                    <div class="form-check">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-outline-success">
+                                <input type="radio" name="comida" id="desayuno" [(ngModel)]="comida" value="Desayuno">
+                                Desayuno
+                            </label>
+                            <label class="btn btn-outline-success">
+                                <input type="radio" name="comida" id="almuerzo" [(ngModel)]="comida" value="Almuerzo">
+                                Almuerzo
+                            </label>
+                            <label class="btn btn-outline-success">
+                                <input type="radio" name="comida" id="comidaPrincipal" [(ngModel)]="comida"
+                                    value="Comida Principal">
+                                Comida Principal
+                            </label>
+                        </div>
+                    </div>
                 </div>
-              </div>              
-  
-          <div class="form-group">
-            <label class="h5" for="comida">Comida:</label>
-            <div class="form-check">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-outline-success">
-                  <input type="radio" name="comida" id="desayuno" [(ngModel)]="comida" value="Desayuno">
-                  Desayuno
-                </label>
-                <label class="btn btn-outline-success">
-                  <input type="radio" name="comida" id="almuerzo" [(ngModel)]="comida" value="Almuerzo">
-                  Almuerzo
-                </label>
-                <label class="btn btn-outline-success">
-                  <input type="radio" name="comida" id="comidaPrincipal" [(ngModel)]="comida" value="Comida Principal">
-                  Comida Principal
-                </label>
-              </div>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="control">Control:</label>
-            <input type="text" id="control" name="control" class="form-control form-control-sm" [(ngModel)]="control" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="pesoGramos">Peso en gramos:</label>
-            <input type="number" id="pesoGramos" name="pesoGramos" class="form-control form-control-sm" [(ngModel)]="pesoGramos" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="pesoTabla">Peso en tabla:</label>
-            <input type="number" id="pesoTabla" name="pesoTabla" class="form-control form-control-sm" [(ngModel)]="pesoTabla" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="choTabla">CHO en tabla:</label>
-            <input type="number" id="choTabla" name="choTabla" class="form-control form-control-sm" [(ngModel)]="choTabla" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="gramosCarbohidratos">Gramos de carbohidratos:</label>
-            <input type="number" id="gramosCarbohidratos" name="gramosCarbohidratos" class="form-control form-control-sm" [(ngModel)]="gramosCarbohidratos" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="totalCHO">Total CHO:</label>
-            <input type="number" id="totalCHO" name="totalCHO" class="form-control form-control-sm" [(ngModel)]="totalCHO" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="insulinaCHO">Insulina x CHO:</label>
-            <input type="number" id="insulinaCHO" name="insulinaCHO" class="form-control form-control-sm" [(ngModel)]="insulinaCHO" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="glucometriaPre">Glucometría Pre:</label>
-            <input type="number" id="glucometriaPre" name="glucometriaPre" class="form-control form-control-sm" [(ngModel)]="glucometriaPre" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="insulinaGlucometria">Insulina x Glucometría:</label>
-            <input type="number" id="insulinaGlucometria" name="insulinaGlucometria" class="form-control form-control-sm" [(ngModel)]="insulinaGlucometria" required>
-          </div>
-  
-          <div class="form-group">
-            <label class="h5" for="totalInsulina">Total Insulina:</label>
-            <input type="number" id="totalInsulina" name="totalInsulina" class="form-control form-control-sm" [(ngModel)]="totalInsulina" required>
-          </div>
-  
-          <button class="btn btn-primary" (click)="guardarDatos()">Guardar</button>
-        </form>
-      </div>
+
+                <div class="form-group">
+                    <label class="h5" for="control">Control:</label>
+                    <input type="text" id="control" name="control" class="form-control form-control-sm"
+                        [(ngModel)]="control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="pesoGramos">Peso en gramos:</label>
+                    <input type="number" id="pesoGramos" name="pesoGramos" class="form-control form-control-sm"
+                        [(ngModel)]="pesoGramos" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="pesoTabla">Peso en tabla:</label>
+                    <input type="number" id="pesoTabla" name="pesoTabla" class="form-control form-control-sm"
+                        [(ngModel)]="pesoTabla" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="choTabla">CHO en tabla:</label>
+                    <input type="number" id="choTabla" name="choTabla" class="form-control form-control-sm"
+                        [(ngModel)]="choTabla" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="gramosCarbohidratos">Gramos de carbohidratos:</label>
+                    <input type="number" id="gramosCarbohidratos" name="gramosCarbohidratos"
+                        class="form-control form-control-sm" [(ngModel)]="gramosCarbohidratos" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="totalCHO">Total CHO:</label>
+                    <input type="number" id="totalCHO" name="totalCHO" class="form-control form-control-sm"
+                        [(ngModel)]="totalCHO" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="insulinaCHO">Insulina x CHO:</label>
+                    <input type="number" id="insulinaCHO" name="insulinaCHO" class="form-control form-control-sm"
+                        [(ngModel)]="insulinaCHO" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="glucometriaPre">Glucometría Pre:</label>
+                    <input type="number" id="glucometriaPre" name="glucometriaPre" class="form-control form-control-sm"
+                        [(ngModel)]="glucometriaPre" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="insulinaGlucometria">Insulina x Glucometría:</label>
+                    <input type="number" id="insulinaGlucometria" name="insulinaGlucometria"
+                        class="form-control form-control-sm" [(ngModel)]="insulinaGlucometria" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="h5" for="totalInsulina">Total Insulina:</label>
+                    <input type="number" id="totalInsulina" name="totalInsulina" class="form-control form-control-sm"
+                        [(ngModel)]="totalInsulina" required>
+                </div>
+
+                <button class="btn btn-primary" (click)="guardarDatos()">Guardar</button>
+            </form>
+        </div>
     </div>
-  </div>
-  
+</div>

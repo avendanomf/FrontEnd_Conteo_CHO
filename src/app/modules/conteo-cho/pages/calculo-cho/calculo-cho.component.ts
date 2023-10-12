@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgbAlertModule, NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
+
 @Component({
   selector: 'app-calculo-cho',
   templateUrl: './calculo-cho.component.html',
@@ -7,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculoChoComponent implements OnInit {
 
+  model: NgbDateStruct;
   fecha: string |undefined;
   control: string|undefined;
   pesoGramos: number|undefined;
