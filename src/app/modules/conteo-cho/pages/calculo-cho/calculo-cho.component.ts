@@ -3,6 +3,7 @@ import { NgbAlertModule, NgbCalendar, NgbDatepickerModule, NgbDateStruct } from 
 import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ParametersService } from '../../../../services/parameters.service';
+import { Parameter } from 'src/app/interfaces/parameter';
 
 
 
@@ -14,10 +15,7 @@ import { ParametersService } from '../../../../services/parameters.service';
 export class CalculoChoComponent implements OnInit {
 
 
-  Ratio: number = 0;
-  Sensibilidad: number = 0;
-  gluMax: number = 0;
-  glucoMin: number = 0;
+  parameter: Parameter ;
 
   model: NgbDateStruct | undefined;
   today = this.calendar.getToday();
@@ -37,6 +35,7 @@ export class CalculoChoComponent implements OnInit {
 
   constructor(private calendar: NgbCalendar, private parameterService: ParametersService) {
     this.model = this.calendar.getToday();
+    this.parameter = new Parameter();
   }
 
   ngOnInit(): void {
@@ -45,10 +44,11 @@ export class CalculoChoComponent implements OnInit {
         const parameter = data[0];
         //console.log(JSON.stringify(parameter));
 
-        this.Ratio = parameter.Ratio;
-        this.Sensibilidad = parameter.Sensibilidad;
-        this.gluMax = parameter.gluMax;
-        this.glucoMin = parameter.glucoMin;
+        this.parameter.Ratio = parameter.Ratio;
+        this.parameter.Sensibilidad = parameter.Sensibilidad;
+        this.parameter.gluMax = parameter.gluMax;
+        this.parameter.glucoMin = parameter.glucoMin;
+        this.parameter.glucoMeta = parameter.glucoMeta;
       }
     });
   }
@@ -58,8 +58,8 @@ export class CalculoChoComponent implements OnInit {
   }
   calcInsulinaCHO() {
     //console.log('totalcho: '+ this.totalCHO);
-    if (this.totalCHO !== undefined && this.Ratio !== undefined) {
-      this.insulinaCHO = parseFloat((this.totalCHO / this.Ratio).toFixed(2));
+    if (this.totalCHO !== undefined && this.parameter.Ratio !== undefined) {
+      this.insulinaCHO = parseFloat((this.totalCHO / this.parameter.Ratio).toFixed(2));
     } else {
       this.insulinaCHO = 0;
     }
@@ -68,9 +68,9 @@ export class CalculoChoComponent implements OnInit {
   }
 
   insulinaxGluco() {
-    if ( this.glucometriaPre != undefined && this.glucometriaPre  < this.gluMax ) 
+    if ( this.glucometriaPre != undefined ) 
     {
-      this.insulinaGlucometria = parseFloat(((this.glucometriaPre - this.glucoMin) / this.Sensibilidad).toFixed(2));
+      this.insulinaGlucometria = parseFloat(((this.glucometriaPre - this.parameter.glucoMeta) / this.parameter.Sensibilidad).toFixed(2));
     }
     if (this.insulinaCHO != undefined && this.insulinaGlucometria != undefined) {
       this.totalInsulina = Math.round(this.insulinaCHO + this.insulinaGlucometria);
