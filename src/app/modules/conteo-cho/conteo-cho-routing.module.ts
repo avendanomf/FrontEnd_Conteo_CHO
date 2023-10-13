@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 import { CalculoChoComponent } from './pages/calculo-cho/calculo-cho.component';
+import { Routes, RouterModule } from '@angular/router';
 
 const routes:Routes=[
 {
