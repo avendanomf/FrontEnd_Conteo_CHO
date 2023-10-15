@@ -3,13 +3,13 @@
         <div class="card-body">
             <h2 class="card-title text-center">Registro y calculo de CHO</h2>
             <form>
-                <div class="form-group mt-2">
+                <div class="form-group mt-2" [ngClass]="{'has-error': !registro.fecha}">
                     <label class="h5" for="fecha">Fecha:</label>
-                    <form class="row row-cols-sm-auto">
+                    <form #f="ngForm">
                         <div class="col-12">
                             <div class="input-group">
-                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model"
-                                    ngbDatepicker #d="ngbDatepicker" />
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                    [(ngModel)]="registro.fecha" ngbDatepicker #d="ngbDatepicker" required />
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
                                     type="button">
                                 </button>
@@ -17,27 +17,29 @@
                         </div>
                     </form>
                 </div>
-                <div class="form-group mt-2">
+                <div class="form-group mt-2" [ngClass]="{'has-error': !registro.comida}">
                     <label class="h5" for="comida">Comida:</label>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group" role="group" aria-label="Vertical radio toggle button group">
-                            <input type="radio" class="btn-check" name="vbtn-radio1" id="desayuno" [(ngModel)]="comida"
-                                [value]="'Desayuno'" autocomplete="off">
+                            <input type="radio" class="btn-check" name="vbtn-radio1" id="desayuno"
+                                [(ngModel)]="registro.comida" [value]="'Desayuno'" autocomplete="off" required>
                             <label class="btn btn-outline-primary" for="desayuno">Desayuno</label>
-                            <input type="radio" class="btn-check" name="vbtn-radio1" id="almuerzo" [(ngModel)]="comida"
-                                [value]="'Almuerzo'" autocomplete="off">
+                            <input type="radio" class="btn-check" name="vbtn-radio1" id="almuerzo"
+                                [(ngModel)]="registro.comida" [value]="'Almuerzo'" autocomplete="off" required>
                             <label class="btn btn-outline-primary" for="almuerzo">Almuerzo</label>
-                            <input type="radio" class="btn-check" name="vbtn-radio1" id="comida" [(ngModel)]="comida"
-                                [value]="'Comida'" autocomplete="off">
+                            <input type="radio" class="btn-check" name="vbtn-radio1" id="comida"
+                                [(ngModel)]="registro.comida" [value]="'Comida'" autocomplete="off" required>
                             <label class="btn btn-outline-primary" for="comida">Comida</label>
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group mt-4">
-                    <div class="card" >
-                        <div class="card-body">
+                    <div class="card">
+                        <div class="card-body" [ngClass]="{'has-error': !validarCamposComidas()}">
                             <label class="h5" for="control">Registro de comidas:</label>
-                            <app-resgitro-comidas (totalCHOEvent)="actualizarTotalCHO($event)"></app-resgitro-comidas>
+                            <app-resgitro-comidas #registroComidas
+                                (totalCHOEvent)="actualizarTotalCHO($event)"></app-resgitro-comidas>
                         </div>
                     </div>
                 </div>
@@ -45,34 +47,56 @@
                 <div class="form-group mt-2">
                     <label class="h5" for="totalCHO">Total CHO:</label>
                     <input type="number" id="totalCHO" name="totalCHO" class="form-control form-control-sm"
-                        [(ngModel)]="totalCHO" disabled readonly>
+                        [(ngModel)]="registro.totalCHO" disabled readonly>
                 </div>
 
                 <div class="form-group mt-2">
                     <label class="h5" for="insulinaCHO">Insulina x CHO:</label>
                     <input type="number" id="insulinaCHO" name="insulinaCHO" class="form-control form-control-sm"
-                        [(ngModel)]="insulinaCHO" disabled readonly>
+                        [(ngModel)]="insulinas.insulinaCHO" disabled readonly>
                 </div>
 
-                <div class="form-group mt-2">
+                <div class="form-group mt-2"
+                    [ngClass]="{'has-error': !glucometrias.nivelGlucosa ||!glucometrias.horaRegistro }  ">
                     <label class="h5" for="glucometriaPre">Glucometría Pre:</label>
-                    <input type="number" id="glucometriaPre" name="glucometriaPre" class="form-control form-control-sm"
-                        [(ngModel)]="glucometriaPre" (ngModelChange)="insulinaxGluco()" required>
+                    <div class="input-group mb-3">
+                        <input type="number" name="nivelGlucosa" class="form-control" placeholder="Nivel de glucosa"
+                            aria-label="Nivel de glucosa" [(ngModel)]="glucometrias.nivelGlucosa"
+                            (ngModelChange)="insulinaxGluco()" required>
+                        <span class="input-group-text"></span>
+                        <input type="time" name="horaRegistro" class="form-control" placeholder="Hora" aria-label="Hora"
+                            [(ngModel)]="glucometrias.horaRegistro" required>
+                    </div>
                 </div>
+
 
                 <div class="form-group mt-2">
                     <label class="h5" for="insulinaGlucometria">Insulina x Glucometría:</label>
                     <input type="number" id="insulinaGlucometria" name="insulinaGlucometria"
-                        class="form-control form-control-sm" [(ngModel)]="insulinaGlucometria" disabled readonly>
+                        class="form-control form-control-sm" [(ngModel)]="insulinas.insulinaGlucometria" disabled
+                        readonly>
                 </div>
 
                 <div class="form-group mt-2">
                     <label class="h5" for="totalInsulina">Total Insulina:</label>
                     <input type="number" id="totalInsulina" name="totalInsulina" class="form-control form-control-sm"
-                        [(ngModel)]="totalInsulina" disabled readonly>
+                        [(ngModel)]="insulinas.insulinaTotal" disabled readonly>
                 </div>
                 <div class="form-group mt-2">
-                    <button class="btn btn-primary" (click)="guardarDatos()">Guardar</button>
+                    <div class="container px-4 text-center">
+                        <div class="row gx-5">
+                            <div class="col">
+                                <div class="p-3">
+                                    <button class="btn btn-primary" (click)="guardarDatos()">Guardar</button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3">
+                                    <button class="btn btn-secondary" (click)="limpiarCampos()">Limpiar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

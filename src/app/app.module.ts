@@ -7,6 +7,9 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JsonFileService } from './services/save-json.service';
 
 
 
@@ -21,9 +24,11 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     RouterModule.forRoot([]),
     NgbModule,
     HttpClientModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [JsonFileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

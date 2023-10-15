@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CalculoChoComponent } from './pages/calculo-cho/calculo-cho.component';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes:Routes=[
-{
-  path:'',
-  children:[
-    {path:'inicio',component: CalculoChoComponent},
-    {path:'**',redirectTo:'inicio'}
-  ]
-}
+const routes: Routes = [
+  {
+    path: '',
+    children: [
+      { path: 'inicio', component: CalculoChoComponent },
+      { path: '**', redirectTo: 'inicio' }
+    ]
+  }
 ]
 
 

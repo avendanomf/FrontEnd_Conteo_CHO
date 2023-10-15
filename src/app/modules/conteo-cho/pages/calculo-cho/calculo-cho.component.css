@@ -1,0 +1,37 @@
+.has-error input.ng-dirty.ng-invalid, .has-error select.ng-dirty.ng-invalid {
+    border-color: #a94442;
+    background-color: #f2dede;
+    color: #a94442;
+    border: 2px solid #a94442; /* Aplica un borde rojo al contenedor */
+}
+
+.has-error textarea.ng-dirty.ng-invalid {
+    border-color: #a94442;
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.has-error .form-control {
+    border-color: #a94442;
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.has-error .btn-group {
+    border-color: #a94442; /* Aplica un borde rojo al contenedor */
+    background-color: #f2dede;
+    color: #a94442;
+    border: 2px solid #a94442;
+}
+.has-error .btn {
+    color: #303030;
+}
+
+
+.has-error input.ng-dirty.ng-invalid, .has-error select.ng-dirty.ng-invalid {
+    border-color: #a94442;
+    background-color: #f2dede;
+    color: #a94442;
+    border: 2px solid #a94442; /* Aplica un borde rojo al contenedor */
+}
+

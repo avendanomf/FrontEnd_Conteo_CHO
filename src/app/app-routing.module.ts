@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren:()=>import('./modules/conteo-cho/conteo-cho.module').then(m => m.ConteoChoModule)
   },
   {
+    path:'report',
+    loadChildren:()=>import('./modules/reporte-cho/reporte-cho.module').then(m => m.ReporteCHOModule)
+  }
+  ,
+  {
     path:'**',
     redirectTo:'home'
   }
