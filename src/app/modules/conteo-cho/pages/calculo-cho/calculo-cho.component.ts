@@ -136,7 +136,7 @@ export class CalculoChoComponent implements OnInit {
       const month = date.month || 1;
       const day = date.day || 1;
 
-      const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}T20:19:22.067Z`;
+      const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
       return formattedDate;
     }
@@ -165,6 +165,7 @@ export class CalculoChoComponent implements OnInit {
     const vsaveRegistroApi = new SaveRegistroApi();
     vsaveRegistroApi.comida = this.registro.comida !== undefined ? this.registro.comida : '';
     vsaveRegistroApi.fecha = this.formatDate(this.registro.fecha);
+    console.log(this.formatDate(this.registro.fecha));
     vsaveRegistroApi.totalCho = this.registro.totalCHO !== undefined ? this.registro.totalCHO : 0;
     vsaveRegistroApi.tblComida = this.registro.comidas.map((fila: Fila) => {
       const vcomida: Comida = {

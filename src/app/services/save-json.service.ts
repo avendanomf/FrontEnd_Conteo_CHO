@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http'
 })
 export class JsonFileService {
 
-  private apiUrl = 'https://localhost:7212/api/RegistroCHO/';
+  private apiUrl = 'https://localhost:7068/api/RegistroCHO/';
 
   constructor(private http: HttpClient) { }
 
